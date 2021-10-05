@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>tilt me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        canvas = document.getElementById("canvas")
+        ctx = canvas.getContext("2d")
+        resize = () => {
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+        }
+        window.onresize = resize
+        resize()
+        α, β, γ = 0, 0, 0
+        window.addEventListener('deviceorientation', (e) => {
+            α, β, γ = e.alpha, e.beta, e.gamma
+        })
+        setInterval(() => {
+            ctx.fillStyle = "black"
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
+            ctx.fillStyle = "white"
+            ctx.font = "30px Arial"
+            ctx.fillText(`α: ${α} β: ${β} γ: ${γ}`, 10, 30)
+        }, 1000 / 60)
+    </script>
+</body>
