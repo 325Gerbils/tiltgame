@@ -17,9 +17,11 @@
         }
         window.onresize = resize
         resize()
-        [α, β, γ] = [0, 0, 0]
+        var α, β, γ = [0, 0, 0]
         window.addEventListener('deviceorientation', (e) => {
-            [α, β, γ] = [e.alpha, e.beta, e.gamma]
+            α = e.alpha
+            β = e.beta
+            γ = e.gamma
         })
         setInterval(() => {
             ctx.fillStyle = "black"
