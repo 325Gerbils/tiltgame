@@ -54,7 +54,7 @@
                 r: Math.random() * 15 + 5
             })
         }
-        shouldCheck = true // dont check for more collisions if we're already inside something
+        colliding = true // dont check for more collisions if we're already inside something
         setInterval(() => {
             ctx.fillStyle = "black"
             ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -86,17 +86,22 @@
                     var dx = spike.x - ball.x
                     var dy = spike.y - ball.y
                     var d = Math.sqrt(dx * dx + dy * dy)
-                    if (shouldCheck) {
-                        if (d < spike.r + ball.r) {
+                    // if you're colliding
+                    if (d < spike.r + ball.r) {
+                        // and the variable is not yet set
+                        if (!colliding) {
+                            // make a new spike and set variable.
                             spikes.push({
                                 x: Math.random() * window.innerWidth,
                                 y: Math.random() * window.innerHeight,
                                 r: Math.random() * 15 + 10
                             })
-                            shouldCheck = false
-                        }else {
-                            shouldCheck = true
+                            // now no more spikes will be made until this is false
+                            colliding = true
                         }
+                    } else {
+                        // if you're not colliding, its ok to make more spikes next time you collide
+                        colliding = false
                     }
                 }
                 for (var i = 0; i < food.length; i++) {
