@@ -109,44 +109,6 @@
                         })
                     }
                 }
-
-                // draw the ball
-                ctx.beginPath()
-                ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI)
-                ctx.fill()
-
-                // draw the spikes
-                for (var i = 0; i < spikes.length; i++) {
-                    var spike = spikes[i]
-                    ctx.beginPath()
-                    ctx.arc(spike.x, spike.y, spike.r, 0, 2 * Math.PI)
-                    ctx.fill()
-                }
-
-                // draw the food
-                for (var i = 0; i < food.length; i++) {
-                    var f = food[i]
-                    ctx.beginPath()
-                    ctx.arc(f.x, f.y, f.r, 0, 2 * Math.PI)
-                    ctx.fill()
-                }
-            } else {
-                ctx.fillText("tilt me", canvas.width / 2, canvas.height / 2)
-            }
-        }, 20)
-    </script>
-</body>
-
-</html>
-
-                        food.splice(i, 1)
-                        food.push({
-                            x: Math.random() * window.innerWidth,
-                            y: Math.random() * window.innerHeight,
-                            r: Math.random() * 10 + 5
-                        })
-                    }
-                }
                 
                 // draw spikes
                 ctx.fillStyle = "red"
