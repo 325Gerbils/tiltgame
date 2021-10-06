@@ -54,14 +54,25 @@
             ctx.fillStyle = "white"
             ctx.font = "20px Arial"
             if (α != null && β != null && γ != null) {
+
+                // physics
                 ball.x += ball.vx
                 ball.y += ball.vy
                 ball.vx += γ / 350
                 ball.vy += β / 350
                 ball.vx *= 0.99
                 ball.vy *= 0.99
+
+                // bounce off the sides
                 if (ball.x - ball.r < 0 || ball.x + ball.r > canvas.width) ball.vx = -ball.vx * 0.95
                 if (ball.y - ball.r < 0 || ball.y + ball.r > canvas.height) ball.vy = -ball.vy * 0.95
+
+                // constrain to screen
+                if (ball.x - ball.r < 0) ball.x = ball.r
+                if (ball.x + ball.r > canvas.width) ball.x = canvas.width - ball.r
+                if (ball.y - ball.r < 0) ball.y = ball.r
+                if (ball.y + ball.r > canvas.height) ball.y = canvas.height - ball.r
+
                 // collision checking with spikes
                 for (var i = 0; i < spikes.length; i++) {
                     var spike = spikes[i]
@@ -82,18 +93,23 @@
                     }
                 }
                 
+                // draw spikes
+                ctx.fillStyle = "red"
                 for (var i = 0; i < spikes.length; i++) {
                     var spike = spikes[i]
                     ctx.beginPath()
-                    ctx.fillStyle = "red"
                     ctx.arc(spike.x, spike.y, spike.r, 0, 2 * Math.PI)
                     ctx.fill()
                 }
-                ctx.fillText(`α: ${fix(α,3)} β: ${fix(β,3)} γ: ${fix(γ,3)}`, 10, 30)
-                ctx.beginPath()
+                // draw ball
                 ctx.fillStyle = "white" 
+                ctx.beginPath()
                 ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI)
                 ctx.fill()
+
+                // debug
+                ctx.fillStyle = "white" 
+                ctx.fillText(`α: ${fix(α,3)} β: ${fix(β,3)} γ: ${fix(γ,3)}`, 10, 30)
             }
         }, 1000 / 60)
     </script>
