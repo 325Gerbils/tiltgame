@@ -16,6 +16,7 @@
 <body>
     <canvas id="canvas"></canvas>
     <script>
+        fix = (val, digits) => Math.round(val * Math.pow(10, digits)) / Math.pow(10, digits)
         canvas = document.getElementById("canvas")
         ctx = canvas.getContext("2d")
         resize = () => {
@@ -42,12 +43,18 @@
             spikes.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                vx: Math.random() * 10 - 5,
-                vy: Math.random() * 10 - 5,
-                r: Math.random() * 10 + 10
+                r: Math.random() * 15 + 10
             })
         }
-        fix = (val, digits) => Math.round(val * Math.pow(10, digits)) / Math.pow(10, digits)
+        food = []
+        for (var i = 0; i < 5; i++) {
+            food.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                r: Math.random() * 10 + 5
+            })
+        }
+
         setInterval(() => {
             ctx.fillStyle = "black"
             ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -80,15 +87,27 @@
                     var dy = spike.y - ball.y
                     var d = Math.sqrt(dx * dx + dy * dy)
                     if (d < spike.r + ball.r) {
-                        ball.vx = -ball.vx * 0.95
-                        ball.vy = -ball.vy * 0.95
-                        spikes.splice(i, 1)
-                        spikes.push({
+                        // you die
+                        window.location.reload()
+                    }
+                }
+                for (var i = 0; i < food.length; i++) {
+                    var f = food[i]
+                    var dx = f.x - ball.x
+                    var dy = f.y - ball.y
+                    var d = Math.sqrt(dx * dx + dy * dy)
+                    if (d < f.r + ball.r) {
+                        // circle-circle collision physics to bounce off the food
+                        var vx = ball.vx - f.x / d
+                        var vy = ball.vy - f.y / d
+                        ball.vx = vx * 0.9
+                        ball.vy = vy * 0.9
+                       
+                        food.splice(i, 1)
+                        food.push({
                             x: Math.random() * window.innerWidth,
                             y: Math.random() * window.innerHeight,
-                            vx: Math.random() * 10 - 5,
-                            vy: Math.random() * 10 - 5,
-                            r: Math.random() * 10 + 10
+                            r: Math.random() * 10 + 5
                         })
                     }
                 }
