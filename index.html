@@ -54,7 +54,7 @@
                 r: Math.random() * 15 + 5
             })
         }
-        colliding = true // dont check for more collisions if we're already inside something
+        points = 0
         setInterval(() => {
             ctx.fillStyle = "black"
             ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -88,6 +88,7 @@
                     var d = Math.sqrt(dx * dx + dy * dy)
                     // if you're colliding
                     if (d < spike.r + ball.r) {
+                        points--
                         spikes.splice(i,1)
                         spikes.push({
                             x: Math.random() * window.innerWidth,
@@ -107,6 +108,7 @@
                     var dy = f.y - ball.y
                     var d = Math.sqrt(dx * dx + dy * dy)
                     if (d < f.r + ball.r) {
+                        points++
                         ball.vx *= 0.5
                         ball.vy *= 0.5
                         food.splice(i, 1)
@@ -143,6 +145,7 @@
                 // debug
                 ctx.fillStyle = "white" 
                 ctx.fillText(`α: ${fix(α,3)} β: ${fix(β,3)} γ: ${fix(γ,3)}`, 10, 30)
+                ctx.fillText(`points: ${points}`, 10, 50)
             }
         }, 1000 / 60)
         document.onclick = (e) => {
