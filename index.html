@@ -39,11 +39,11 @@
             r: 20
         }
         spikes = []
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 1; i++) {
             spikes.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 15 + 10
+                r: Math.random() * 15 + 15
             })
         }
         food = []
@@ -51,7 +51,7 @@
             food.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 10 + 5
+                r: Math.random() * 15 + 5
             })
         }
 
@@ -87,10 +87,11 @@
                     var dy = spike.y - ball.y
                     var d = Math.sqrt(dx * dx + dy * dy)
                     if (d < spike.r + ball.r) {
-                        
-                        ball.vx = -ball.vx * 0.95
-                        ball.vy = -ball.vy * 0.95
-                        //window.location.reload()
+                        spikes.push({
+                            x: Math.random() * window.innerWidth,
+                            y: Math.random() * window.innerHeight,
+                            r: Math.random() * 15 + 10
+                        })
                     }
                 }
                 for (var i = 0; i < food.length; i++) {
@@ -99,8 +100,6 @@
                     var dy = f.y - ball.y
                     var d = Math.sqrt(dx * dx + dy * dy)
                     if (d < f.r + ball.r) {
-                        ball.vx = -ball.vx * 0.95
-                        ball.vy = -ball.vy * 0.95
                         food.splice(i, 1)
                         food.push({
                             x: Math.random() * window.innerWidth,
