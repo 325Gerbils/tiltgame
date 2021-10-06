@@ -37,6 +37,7 @@
             vy: 0,
             r: 20
         }
+        fix = (val, digits) => Math.round(val * Math.pow(10, digits)) / Math.pow(10, digits)
         setInterval(() => {
             ctx.fillStyle = "black"
             ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -45,11 +46,11 @@
             if (α != null && β != null && γ != null) {
                 ball.x += ball.vx
                 ball.y += ball.vy
-                ball.vx += α / 1000
+                ball.vx += γ / 1000
                 ball.vy += β / 1000
-                // ball.vx *= 0.99
-                // ball.vy *= 0.99
-                ctx.fillText(`α: ${(α*1e3)/1e3} β: ${(β*1e3)/1e3} γ: ${(γ*1e3)/1e3}`, 10, 30)
+                ball.vx *= 0.99
+                ball.vy *= 0.99
+                ctx.fillText(`α: ${fix(α,3)} β: ${fix(β)} γ: ${fix(γ)}`, 10, 30)
                 ctx.beginPath()
                 ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI)
                 ctx.fill()
