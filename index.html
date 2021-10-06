@@ -137,5 +137,10 @@
                 ctx.fillText(`α: ${fix(α,3)} β: ${fix(β,3)} γ: ${fix(γ,3)}`, 10, 30)
             }
         }, 1000 / 60)
+        document.ontouchstart = (e) => {
+            e.preventDefault()
+            ball.vx = (e.touches[0].clientX - ball.x) / 10
+            ball.vy = (e.touches[0].clientY - ball.y) / 10
+        }
     </script>
 </body>
