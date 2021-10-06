@@ -48,10 +48,10 @@
                 ball.y += ball.vy
                 ball.vx += γ / 200
                 ball.vy += β / 200
-                // ball.vx *= 0.99
-                // ball.vy *= 0.99
-                if (ball.x - ball.r < 0 || ball.x + ball.r > canvas.width) ball.vx = -ball.vx
-                if (ball.y - ball.r < 0 || ball.y + ball.r > canvas.height) ball.vy = -ball.vy
+                ball.vx *= 0.99
+                ball.vy *= 0.99
+                if (ball.x - ball.r < 0 || ball.x + ball.r > canvas.width) ball.vx = -ball.vx * 0.95
+                if (ball.y - ball.r < 0 || ball.y + ball.r > canvas.height) ball.vy = -ball.vy * 0.95
 
                 ctx.fillText(`α: ${fix(α,3)} β: ${fix(β,3)} γ: ${fix(γ,3)}`, 10, 30)
                 ctx.beginPath()
