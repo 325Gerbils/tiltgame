@@ -102,8 +102,8 @@
                         // circle-circle collision physics to bounce off the food
                         var vx = ball.vx - f.x / d
                         var vy = ball.vy - f.y / d
-                        ball.vx = vx * 0.9
-                        ball.vy = vy * 0.9
+                        ball.vx = vx * 0.1
+                        ball.vy = vy * 0.1
                        
                         food.splice(i, 1)
                         food.push({
