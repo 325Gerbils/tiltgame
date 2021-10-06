@@ -120,6 +120,14 @@
                     ctx.arc(spike.x, spike.y, spike.r, 0, 2 * Math.PI)
                     ctx.fill()
                 }
+                // draw food
+                ctx.fillStyle = "green"
+                for (var i = 0; i < food.length; i++) {
+                    var f = food[i]
+                    ctx.beginPath()
+                    ctx.arc(f.x, f.y, f.r, 0, 2 * Math.PI)
+                    ctx.fill()
+                }
                 // draw ball
                 ctx.fillStyle = "white" 
                 ctx.beginPath()
