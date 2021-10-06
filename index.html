@@ -88,20 +88,17 @@
                     var d = Math.sqrt(dx * dx + dy * dy)
                     // if you're colliding
                     if (d < spike.r + ball.r) {
-                        // and the variable is not yet set
-                        if (!colliding) {
-                            // make a new spike and set variable.
-                            spikes.push({
-                                x: Math.random() * window.innerWidth,
-                                y: Math.random() * window.innerHeight,
-                                r: Math.random() * 15 + 10
-                            })
-                            // now no more spikes will be made until this is false
-                            colliding = true
-                        }
-                    } else {
-                        // if you're not colliding, its ok to make more spikes next time you collide
-                        colliding = false
+                        spikes.splice(i,1)
+                        spikes.push({
+                            x: Math.random() * window.innerWidth,
+                            y: Math.random() * window.innerHeight,
+                            r: Math.random() * 15 + 10
+                        })
+                        spikes.push({
+                            x: Math.random() * window.innerWidth,
+                            y: Math.random() * window.innerHeight,
+                            r: Math.random() * 15 + 10
+                        })
                     }
                 }
                 for (var i = 0; i < food.length; i++) {
