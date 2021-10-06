@@ -88,6 +88,8 @@
                     var d = Math.sqrt(dx * dx + dy * dy)
                     if (d < spike.r + ball.r) {
                         // you die
+                        ball.vx = 0
+                        ball.vy = 0
                         window.location.reload()
                     }
                 }
